@@ -55,7 +55,7 @@ export function BlockChainProvider({ children }: React.PropsWithChildren<{}>) {
 
   const onGenerate = React.useCallback((data: string) => {
     if (blockchainObj.current) {
-      const result = blockchainObj.current.chain.addBlock([data]);
+      const result = blockchainObj.current.chain.generate([data]);
       if (!result.isError) {
         setNewBlock(result.value);
         setStep("verify");
@@ -67,7 +67,25 @@ export function BlockChainProvider({ children }: React.PropsWithChildren<{}>) {
 
   const onVerify = React.useCallback((nonce: number) => {}, []);
 
-  const onRegist = React.useCallback(() => {}, []);
+  const onRegist = React.useCallback(() => {
+    if (newBlock && nonce && verifyHash && blockchainObj.current) {
+      if (verifyHash.startsWith("0".repeat(difficulty!))) {
+        const _newBlock: IBlock = {
+          ...newBlock,
+          hash: verifyHash,
+          nonce,
+        };
+
+        blockchainObj.current.chain.addBlock(_newBlock);
+        setBlockChain([...blockchainObj.current.chain.chain]);
+
+        setNewBlock(null);
+        setDifficulty(1);
+        setNonce(0);
+        setStep("generate");
+      }
+    }
+  }, [newBlock, nonce, verifyHash, difficulty]);
 
   const onChangeDifficulty = React.useCallback((difficulty: number) => {
     setDifficulty(difficulty);

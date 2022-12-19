@@ -29,7 +29,11 @@ export class Chain {
     return this.blockchain[this.blockchain.length - 1];
   }
 
-  public addBlock(data: string[]): Failable<Block, string> {
+  public addBlock(newBlock: Block) {
+    this.blockchain.push(newBlock);
+  }
+
+  public generate(data: string[]): Failable<Block, string> {
     const previousBlock = this.latestBlock;
 
     // const adjustmentBlock: Block = this.getAdjustmentBlock();
@@ -40,7 +44,7 @@ export class Chain {
 
     if (isValid.isError) return { isError: true, error: isValid.error };
 
-    this.blockchain.push(newBlock);
+    // this.blockchain.push(newBlock);
 
     return { isError: false, value: newBlock };
   }

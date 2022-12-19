@@ -12,7 +12,8 @@ import {
 import React from "react";
 
 function Success() {
-  const { verifyHash, difficulty } = React.useContext(BlockChainContext);
+  const { verifyHash, difficulty, onRegist } =
+    React.useContext(BlockChainContext);
 
   return (
     <Card flex={1}>
@@ -30,7 +31,8 @@ function Success() {
           <Button
             colorScheme="messenger"
             marginTop={4}
-            disabled={!verifyHash?.startsWith("0".repeat(difficulty!))}>
+            disabled={!verifyHash?.startsWith("0".repeat(difficulty!))}
+            onClick={onRegist}>
             등록
           </Button>
         </Flex>
