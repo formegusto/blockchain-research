@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.4.4",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -12,11 +15,13 @@
     "@types/react-dom": "^18.0.0",
     "buffer": "^6.0.3",
     "crypto-js": "^4.1.1",
+    "framer-motion": "^7.10.2",
     "hex-to-binary": "^1.0.1",
     "merkle": "^0.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
@@ -47,6 +52,7 @@
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
     "@types/merkle": "^0.6.1",
+    "@types/styled-components": "^5.1.26",
     "crypto-browserify": "^3.12.0",
     "customize-cra": "^1.0.0",
     "process": "^0.11.10",
