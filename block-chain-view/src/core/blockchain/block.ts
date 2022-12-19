@@ -18,8 +18,8 @@ export class Block extends BlockHeader implements IBlock {
 
   constructor(
     _previouseBlock: Block,
-    _data: string[],
-    _adjustmentBlock: Block
+    _data: string[]
+    // _adjustmentBlock: Block
   ) {
     super(_previouseBlock);
 
@@ -28,11 +28,12 @@ export class Block extends BlockHeader implements IBlock {
     this.merkleRoot = merkleRoot;
     this.hash = Block.createBlockHash(this);
     this.nonce = 0;
-    this.difficulty = Block.getDifficulty(
-      this,
-      _adjustmentBlock,
-      _previouseBlock
-    );
+    // this.difficulty = Block.getDifficulty(
+    //   this,
+    //   _adjustmentBlock,
+    //   _previouseBlock
+    // );
+    this.difficulty = 1;
     this.data = _data;
   }
 
@@ -52,7 +53,7 @@ export class Block extends BlockHeader implements IBlock {
       height,
       merkleRoot,
       previousHash,
-      difficulty,
+      // difficulty,
       nonce,
     } = _block;
     const values: string = [
@@ -61,20 +62,17 @@ export class Block extends BlockHeader implements IBlock {
       height,
       merkleRoot,
       previousHash,
-      difficulty,
+      // difficulty,
       nonce,
     ].join("");
     return SHA256(values).toString();
   }
 
-  public static generateBlock(
-    _previousBlock: Block,
-    _data: string[],
-    _adjustmentBlock: Block
-  ): Block {
-    const generateBlock = new Block(_previousBlock, _data, _adjustmentBlock);
+  public static generateBlock(_previousBlock: Block, _data: string[]): Block {
+    // const generateBlock = new Block(_previousBlock, _data, _adjustmentBlock);
 
-    const newBlock = Block.findBlock(generateBlock);
+    // const newBlock = Block.findBlock(generateBlock);
+    const newBlock = new Block(_previousBlock, _data);
 
     return newBlock;
   }

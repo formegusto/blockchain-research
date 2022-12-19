@@ -1,3 +1,4 @@
+import { BlockChainContext } from "@/context";
 import {
   Button,
   Card,
@@ -8,8 +9,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import React from "react";
 
 function Success() {
+  const { verifyHash, difficulty } = React.useContext(BlockChainContext);
+
   return (
     <Card flex={1}>
       <CardHeader>
@@ -18,16 +22,15 @@ function Success() {
       <CardBody>
         <Stack rowGap={2}>
           <Stack>
-            <Heading size="md">정답값</Heading>
-            <Text fontSize="sm">ㅁㄴㅇㄹㄴㅇㅁㄹㄴㅁㄹㄴㅁ</Text>
-          </Stack>
-          <Stack>
             <Heading size="md">검증값</Heading>
-            <Text fontSize="sm">ㅁㄴㅇㄹㄴㅇㅁㄹㄴㅁㄹㄴㅁ</Text>
+            <Text fontSize="sm">{verifyHash && verifyHash}</Text>
           </Stack>
         </Stack>
         <Flex justify="flex-end" align="flex-end">
-          <Button colorScheme="messenger" marginTop={4}>
+          <Button
+            colorScheme="messenger"
+            marginTop={4}
+            disabled={!verifyHash?.startsWith("0".repeat(difficulty!))}>
             등록
           </Button>
         </Flex>

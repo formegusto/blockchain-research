@@ -32,9 +32,10 @@ export class Chain {
   public addBlock(data: string[]): Failable<Block, string> {
     const previousBlock = this.latestBlock;
 
-    const adjustmentBlock: Block = this.getAdjustmentBlock();
+    // const adjustmentBlock: Block = this.getAdjustmentBlock();
 
-    const newBlock = Block.generateBlock(previousBlock, data, adjustmentBlock);
+    // const newBlock = Block.generateBlock(previousBlock, data, adjustmentBlock);
+    const newBlock = Block.generateBlock(previousBlock, data);
     const isValid = Block.isValidNewBlock(newBlock, previousBlock);
 
     if (isValid.isError) return { isError: true, error: isValid.error };
