@@ -32,7 +32,7 @@ function SellBtn() {
     }
   }, [contract, account, web3, dispatch]);
 
-  return <button onClick={onSell}>Sell</button>;
+  return <button onClick={onSell}>sell</button>;
 }
 
 export default SellBtn;
