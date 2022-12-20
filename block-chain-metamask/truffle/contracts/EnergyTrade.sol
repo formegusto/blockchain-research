@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
+
 /*
  1eth의 가치로 자신의 사용량을
  Energy Market에 올려 공유하는 smart contract
@@ -10,17 +11,17 @@ contract EnergyTrade {
         address payable seller;
         uint256 usage;
     }
-    Rate[] private rateBySeller;
+    Rate[] rateBySeller;
     uint256 private totalUsage = 0;
-
     event Usage(uint256 usage);
 
     /**
      regist
      사용량 등록 (only 1 ether rate)
      */
-    function regist(address payable seller, uint256 _usage) public  {
-        rateBySeller.push(Rate(seller, _usage));
+    function regist(address payable seller, uint256 _usage) public {
+        Rate memory rate = Rate(seller, _usage);
+        rateBySeller.push(rate);
         totalUsage += _usage;
     }
 
