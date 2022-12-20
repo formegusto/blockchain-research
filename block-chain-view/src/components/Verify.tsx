@@ -103,13 +103,13 @@ function Verify() {
             marginTop={4}
             disabled={step !== "verify"}
             onClick={() => setAutoVerify((prev) => !prev)}>
-            자동 검증
+            자동 증명
           </Button>
           <Button
             colorScheme="messenger"
             marginTop={4}
             disabled={step !== "verify"}>
-            검증
+            증명
           </Button>
         </Flex>
       </CardBody>

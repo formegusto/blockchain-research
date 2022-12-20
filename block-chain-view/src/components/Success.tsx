@@ -23,7 +23,7 @@ function Success() {
       <CardBody>
         <Stack rowGap={2}>
           <Stack>
-            <Heading size="md">검증값</Heading>
+            <Heading size="md">증명값</Heading>
             <Text fontSize="sm">{verifyHash && verifyHash}</Text>
           </Stack>
         </Stack>

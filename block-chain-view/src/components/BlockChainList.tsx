@@ -1,20 +1,43 @@
 import { BlockChainContext } from "@/context";
-import { Card } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import styled from "styled-components";
 
 function BlockChainList() {
   const { blockchain } = React.useContext(BlockChainContext);
 
-  console.log(blockchain);
-
   return (
     <Wrap>
-      <Card w="500px" h="300px" display="inline-block"></Card>
-      <Card w="500px" h="300px" display="inline-block"></Card>
-      <Card w="500px" h="300px" display="inline-block"></Card>
-      <Card w="500px" h="300px" display="inline-block"></Card>
-      <Card w="500px" h="300px" display="inline-block"></Card>
+      {blockchain.map((block) => (
+        <Card w="500px" display="inline-block" key={block.hash}>
+          <CardHeader>
+            <Heading>Block # {block.height}</Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack spacing={4}>
+              <Stack border="1px solid #333" borderRadius={8} p={2}>
+                <Heading size="xs">이전 해시</Heading>
+                <Text>{block.previousHash}</Text>
+              </Stack>
+              <Stack border="1px solid #333" borderRadius={8} p={2}>
+                <Heading size="xs">해시</Heading>
+                <Text>{block.hash}</Text>
+              </Stack>
+              <Stack border="1px solid #333" borderRadius={8} p={2}>
+                <Heading size="xs">data</Heading>
+                <Text>{block.data}</Text>
+              </Stack>
+            </Stack>
+          </CardBody>
+        </Card>
+      ))}
     </Wrap>
   );
 }
