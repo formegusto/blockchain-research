@@ -1,7 +1,7 @@
 import React from "react";
-import { useEth } from "../../contexts/EthContext";
-import { useTrade } from "../../contexts/TradeContext";
-import { actions } from "../../contexts/TradeContext/state";
+import { useEth } from "../contexts/EthContext";
+import { useTrade } from "../contexts/TradeContext";
+import { actions } from "../contexts/TradeContext/state";
 
 function RegistBtn() {
   const {
@@ -15,16 +15,11 @@ function RegistBtn() {
   const onRegist = React.useCallback(async () => {
     try {
       if (contract && account) {
-        const total = await contract.methods
-          .regist(account, 10)
-          .send({ from: account });
-        console.log(total);
+        await contract.methods.regist(account, 10).send({ from: account });
 
         const availableOfPurchase = await contract.methods
           .getAvailableOfPurchase()
           .call();
-
-        console.log("건디용", availableOfPurchase);
 
         dispatch({
           type: actions.init,

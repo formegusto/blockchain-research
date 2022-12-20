@@ -1,6 +1,7 @@
-import AvailableOfPurchase from "./components/Trade/AvailableOfPurchase";
-import RegistBtn from "./components/Trade/RegistBtn";
-import TotalView from "./components/Trade/TotalView";
+import AvailableOfPurchase from "./components/AvailableOfPurchase";
+import RegistBtn from "./components/RegistBtn";
+import SellBtn from "./components/SellBtn";
+import TotalView from "./components/TotalView";
 import { TradeProvider } from "./contexts/TradeContext";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <TotalView />
       <RegistBtn />
       <AvailableOfPurchase />
+      <SellBtn />
     </TradeProvider>
   );
 }

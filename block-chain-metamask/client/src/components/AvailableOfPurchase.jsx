@@ -1,4 +1,4 @@
-import { useTrade } from "../../contexts/TradeContext";
+import { useTrade } from "../contexts/TradeContext";
 
 function AvailableOfPurchase() {
   const {
