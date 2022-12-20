@@ -354,7 +354,7 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@truffle/hdwallet-provider@^2.0.10":
+"@truffle/hdwallet-provider@^2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@truffle/hdwallet-provider/-/hdwallet-provider-2.1.3.tgz#a28194d99105b154022385dd1da5de3367adf795"
   integrity sha512-XOA5AJou4FrHiJEgcewq+86iWJm2t6HrLV5ixGMjULdV+iJzBMtBqOdNM+l8DPSOEIZ3XExOlpZ9PDGs/mD6Uw==
@@ -1170,6 +1170,11 @@ dom-walk@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
   integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
+
+dotenv@^16.0.3:
+  version "16.0.3"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
+  integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
 
 duplexer3@^0.1.4:
   version "0.1.5"
