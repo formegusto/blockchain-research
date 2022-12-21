@@ -24,8 +24,8 @@ function AvailableOfPurchase() {
         let total = await contract.methods.getTotalUsage().call();
         total = Number.parseInt(total);
 
-        let balanace = await web3.eth.getBalance(account);
-        balanace = Number.parseInt(balanace);
+        let balance = await web3.eth.getBalance(account);
+        balance = Number.parseInt(balance);
 
         let buyUsage = await contract.methods.getBuyUsage(account).call();
         buyUsage = Number.parseInt(buyUsage);
@@ -36,7 +36,7 @@ function AvailableOfPurchase() {
 
         dispatch({
           type: actions.init,
-          data: { availableOfPurchase, total, balanace, buyUsage },
+          data: { availableOfPurchase, total, balance, buyUsage },
         });
       }
     },

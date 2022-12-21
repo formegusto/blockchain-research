@@ -22,6 +22,13 @@ contract EnergyTrade {
      사용량 등록 (only 1 ether rate)
      */
     function regist(address payable seller, uint256 _usage) public {
+        uint256 _buyUsage = buyUsage[seller];
+        if(_buyUsage != 0) {
+            if(_buyUsage > _usage)
+                buyUsage[seller] -= _usage;
+            else
+                buyUsage[seller] = 0;
+        }
         Rate memory rate = Rate(seller, _usage);
         rateBySeller.push(rate);
         totalUsage += _usage;

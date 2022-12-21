@@ -29,9 +29,12 @@ function Customer() {
           .getAvailableOfPurchase()
           .call();
 
+        let buyUsage = await contract.methods.getBuyUsage(account).call();
+        buyUsage = Number.parseInt(buyUsage);
+
         dispatch({
           type: actions.init,
-          data: { availableOfPurchase, total },
+          data: { availableOfPurchase, total, buyUsage },
         });
       }
     } catch (err) {
