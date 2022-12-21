@@ -1,10 +1,41 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
+import { useEth } from "../contexts/EthContext";
 import { useTrade } from "../contexts/TradeContext";
+import { actions } from "../contexts/TradeContext/state";
 
 function AvailableOfPurchase() {
   const {
-    state: { availableOfPurchase },
+    state: { contract, web3 },
+  } = useEth();
+  const {
+    state: { account, availableOfPurchase },
+    dispatch,
   } = useTrade();
+
+  const onSell = React.useCallback(
+    async (index) => {
+      if (contract && account) {
+        await contract.methods.sell(index).send({
+          from: account,
+          value: web3.utils.toWei("1", "ether"),
+        });
+
+        let total = await contract.methods.getTotalUsage().call();
+        total = Number.parseInt(total);
+
+        const availableOfPurchase = await contract.methods
+          .getAvailableOfPurchase()
+          .call();
+
+        dispatch({
+          type: actions.init,
+          data: { availableOfPurchase, total },
+        });
+      }
+    },
+    [contract, account, web3, dispatch]
+  );
 
   return (
     <Wrap>
@@ -13,12 +44,27 @@ function AvailableOfPurchase() {
         <List>
           {availableOfPurchase &&
             availableOfPurchase.map(([acc, usage], idx) => (
-              <Item key={idx} isSell={usage === 0}>
-                <Acc>{acc.substring(2, 10)}</Acc>
-                <Usage>
-                  {usage}
-                  <span>kWH</span>
-                </Usage>
+              <Item
+                key={idx}
+                isSell={usage === "0"}
+                onClick={
+                  usage !== "0" && acc !== account
+                    ? () => onSell(idx)
+                    : undefined
+                }>
+                {usage === "0" ? (
+                  <SellOk>판매완료</SellOk>
+                ) : (
+                  <>
+                    <Acc>
+                      {acc !== account ? acc.substring(2, 10) : "my product"}
+                    </Acc>
+                    <Usage>
+                      {usage}
+                      <span>kWH</span>
+                    </Usage>
+                  </>
+                )}
               </Item>
             ))}
         </List>
@@ -28,6 +74,10 @@ function AvailableOfPurchase() {
 }
 
 const Wrap = styled.div``;
+
+const SellOk = styled.h2`
+  font-size: 18px;
+`;
 
 const Title = styled.h2`
   font-size: 20px;
@@ -67,14 +117,18 @@ const Item = styled.div`
 
   position: relative;
 
-  cursor: pointer;
-  transition: 0.3s;
+  ${({ isSell }) =>
+    !isSell &&
+    css`
+      cursor: pointer;
+      transition: 0.3s;
 
-  &:hover {
-    border: none;
-    transform: translateX(-2px) translateY(-2px);
-    box-shadow: 2px 2px 4px #333;
-  }
+      &:hover {
+        border: none;
+        transform: translateX(-2px) translateY(-2px);
+        box-shadow: 2px 2px 4px #333;
+      }
+    `}
 `;
 
 const Acc = styled.span`
