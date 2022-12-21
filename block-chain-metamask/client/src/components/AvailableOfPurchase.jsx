@@ -24,13 +24,19 @@ function AvailableOfPurchase() {
         let total = await contract.methods.getTotalUsage().call();
         total = Number.parseInt(total);
 
+        let balanace = await web3.eth.getBalance(account);
+        balanace = Number.parseInt(balanace);
+
+        let buyUsage = await contract.methods.getBuyUsage(account).call();
+        buyUsage = Number.parseInt(buyUsage);
+
         const availableOfPurchase = await contract.methods
           .getAvailableOfPurchase()
           .call();
 
         dispatch({
           type: actions.init,
-          data: { availableOfPurchase, total },
+          data: { availableOfPurchase, total, balanace, buyUsage },
         });
       }
     },
@@ -43,41 +49,41 @@ function AvailableOfPurchase() {
       <ScrollWrap>
         <List>
           {availableOfPurchase &&
-            availableOfPurchase.map(([acc, usage], idx) => (
-              <Item
-                key={idx}
-                isSell={usage === "0"}
-                onClick={
-                  usage !== "0" && acc !== account
-                    ? () => onSell(idx)
-                    : undefined
-                }>
-                {usage === "0" ? (
-                  <SellOk>판매완료</SellOk>
-                ) : (
-                  <>
-                    <Acc>
-                      {acc !== account ? acc.substring(2, 10) : "my product"}
-                    </Acc>
-                    <Usage>
-                      {usage}
-                      <span>kWH</span>
-                    </Usage>
-                  </>
-                )}
-              </Item>
-            ))}
+            availableOfPurchase.map(([acc, usage], idx) =>
+              usage === "0" ? (
+                <></>
+              ) : (
+                <Item
+                  key={idx}
+                  isSell={usage === "0"}
+                  onClick={
+                    usage !== "0" && acc !== account
+                      ? () => onSell(idx)
+                      : undefined
+                  }>
+                  <Acc>
+                    {acc !== account ? acc.substring(2, 10) : "my product"}
+                  </Acc>
+                  <Usage>
+                    {usage}
+                    <span>kWH</span>
+                  </Usage>
+                </Item>
+              )
+            )}
         </List>
       </ScrollWrap>
     </Wrap>
   );
 }
 
-const Wrap = styled.div``;
-
-const SellOk = styled.h2`
-  font-size: 18px;
+const Wrap = styled.div`
+  height: 150px;
 `;
+
+// const SellOk = styled.h2`
+//   font-size: 18px;
+// `;
 
 const Title = styled.h2`
   font-size: 20px;

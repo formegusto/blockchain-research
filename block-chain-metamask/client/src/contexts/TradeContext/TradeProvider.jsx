@@ -18,11 +18,14 @@ function TradeProvider({ children }) {
       .getAvailableOfPurchase()
       .call();
 
+    let buyUsage = await contract.methods.getBuyUsage(account).call();
+    buyUsage = Number.parseInt(buyUsage);
+
     console.log(availableOfPurchase);
 
     dispatch({
       type: actions.init,
-      data: { account, balance, total, availableOfPurchase },
+      data: { account, balance, total, availableOfPurchase, buyUsage },
     });
   }, []);
 

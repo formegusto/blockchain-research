@@ -7,6 +7,7 @@ const initialState = {
   balance: null,
   total: null,
   availableOfPurchase: null,
+  buyUsage: null,
 };
 
 const reducer = (state, action) => {

@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import { useTrade } from "../contexts/TradeContext";
 
 function BuyUsage() {
+  const {
+    state: { buyUsage },
+  } = useTrade();
   return (
     <Wrap>
-      <Buy>100kWh</Buy>
+      <Buy>{buyUsage} kWh</Buy>
     </Wrap>
   );
 }

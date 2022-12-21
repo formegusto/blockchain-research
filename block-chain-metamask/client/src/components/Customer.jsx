@@ -6,7 +6,7 @@ import BuyUsage from "./BuyUsage";
 
 function Customer() {
   const {
-    state: { account, balance, web3 },
+    state: { account, balance },
     dispatch,
   } = useTrade();
 
@@ -25,22 +25,19 @@ function Customer() {
         let total = await contract.methods.getTotalUsage().call();
         total = Number.parseInt(total);
 
-        let balance = await web3.eth.getBalance(account);
-        balance = Number.parseInt(balance);
-
         const availableOfPurchase = await contract.methods
           .getAvailableOfPurchase()
           .call();
 
         dispatch({
           type: actions.init,
-          data: { availableOfPurchase, total, balance },
+          data: { availableOfPurchase, total },
         });
       }
     } catch (err) {
       console.error(err);
     }
-  }, [account, contract, dispatch, web3, value]);
+  }, [account, contract, dispatch, value]);
 
   return (
     <Wrap>
