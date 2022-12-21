@@ -47,5 +47,12 @@ contract("EnergyTradeTest", async (accounts) => {
 
     const total = await ins.getTotalUsage();
     await expect(total).to.be.bignumber.equal("20");
+
+    // // 구매량 확인
+    const buyUsage = await ins.getBuyUsage(accounts[1]);
+    await expect(buyUsage).to.be.bignumber.equal("10");
+
+    const unbuyUsage = await ins.getBuyUsage(accounts[0]);
+    await expect(unbuyUsage).to.be.bignumber.equal("0");
   });
 });

@@ -13,6 +13,8 @@ contract EnergyTrade {
     }
     Rate[] rateBySeller;
     uint256 private totalUsage = 0;
+    mapping(address => uint256) buyUsage;
+
     event Usage(uint256 usage);
 
     /**
@@ -50,10 +52,19 @@ contract EnergyTrade {
         seller.transfer(msg.value);
 
         uint256 usage = rateBySeller[index].usage;
+        buyUsage[msg.sender] += usage;
 
         totalUsage -= usage;
         delete rateBySeller[index];
 
         emit Usage(usage);
+    }
+
+    /**
+      get sellUsage
+      구매 사용량 확인
+     */
+    function getBuyUsage(address seller) public view returns (uint256) {
+        return buyUsage[seller];
     }
 }
