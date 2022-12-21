@@ -14,12 +14,10 @@ function SellBtn() {
 
   const onSell = React.useCallback(async () => {
     if (contract && account) {
-      const log = await contract.methods.sell(0).send({
+      await contract.methods.sell(0).send({
         from: account,
         value: web3.utils.toWei("1", "ether"),
       });
-
-      console.log(log);
 
       const availableOfPurchase = await contract.methods
         .getAvailableOfPurchase()

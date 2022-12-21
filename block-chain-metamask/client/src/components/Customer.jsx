@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { actions, useEth } from "../contexts/EthContext";
 import { useTrade } from "../contexts/TradeContext";
+import BuyUsage from "./BuyUsage";
 
 function Customer() {
   const {
@@ -43,8 +44,14 @@ function Customer() {
 
   return (
     <Wrap>
-      <Account>{account}</Account>
-      <Balance>{Math.round(balance / 10 ** 18)} ETH</Balance>
+      <BuyUsage />
+      <Information>
+        <Account>
+          <p>{account}</p>
+          <p>{Math.round(balance / 10 ** 18)} ETH</p>
+        </Account>
+      </Information>
+
       <InputWrap>
         <Input
           placeholder="your usage value, when 1eth"
@@ -56,6 +63,12 @@ function Customer() {
     </Wrap>
   );
 }
+
+const Information = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
 
 const InputWrap = styled.div`
   display: flex;
@@ -103,7 +116,7 @@ const Wrap = styled.div`
 
 const Account = styled.div`
   display: flex;
-  flex: 1;
+  /* flex: 1; */
 
   justify-content: center;
   align-items: center;
@@ -111,29 +124,27 @@ const Account = styled.div`
   border: 1px solid #333;
   border-radius: 8px;
 
+  flex-direction: column;
+
   width: 351px;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 40px 0 32px;
 
-  font-size: 20px;
+  font-size: 14px;
   word-break: break-all;
-`;
 
-const Balance = styled.div`
-  display: flex;
-  flex: 1;
+  position: relative;
 
-  justify-content: center;
-  align-items: center;
+  & > p:nth-child(1) {
+    position: absolute;
 
-  border: 1px solid #333;
-  border-radius: 8px;
-
-  width: 351px;
-  box-sizing: border-box;
-
-  font-size: 32px;
-  font-weight: bold;
+    top: 8px;
+    left: 8px;
+  }
+  & > p:nth-child(2) {
+    font-size: 48px;
+    font-weight: bold;
+  }
 `;
 
 export default Customer;
