@@ -170,6 +170,8 @@
 
 ## Blockchain Network Example
 
+[Blockchain Network Example](https://github.com/formegusto/blockchain-research/tree/main/block-chain-view)
+
 ---
 
 # Smart Contract
@@ -194,6 +196,8 @@ Solidity는 Smart Contract를 개발하기 위한 script 언어이다. 해당 �
 2. 탈중앙성 : 구현이 어려운 탈중앙이라는 개념의 서버를 이더리움 네트워크에 올림으로, 간단하게 적용할 수 있다. ( 코드의 실행을 자동화할 수 있다. )
 
 ## Smart Contract Example
+
+[Smart Contract Example](https://github.com/formegusto/blockchain-research/tree/main/block-chain-metamask)
 
 ---
 
